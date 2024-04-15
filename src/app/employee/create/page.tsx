@@ -5,10 +5,26 @@
  */
 "use client";
 import { useCreateEmployee } from "@/domain/hooks/useCreateEmployee.hook";
+import { CreateEmployeeParams } from "@/domain/models/employee.model";
 import React, { useState } from "react";
 
 export default function CreateEmployeePage() {
   const { mutate: createEmployee, isError, error } = useCreateEmployee();
+  const [form, setForm] = useState<CreateEmployeeParams>({
+    name: "",
+    salary: "",
+    age: "",
+  });
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    createEmployee(form);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setForm((prevForm) => ({ ...prevForm, [name]: value }));
+  };
 
   if (isError && error instanceof Error) {
     return (
@@ -26,7 +42,7 @@ export default function CreateEmployeePage() {
         <h1 className="text-2xl font-bold mb-4 text-sky-800 text-center">
           Create Employee
         </h1>
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
               htmlFor="name"
@@ -38,6 +54,8 @@ export default function CreateEmployeePage() {
               type="text"
               name="name"
               id="name"
+              value={form.name}
+              onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               aria-required="true"
             />
@@ -53,6 +71,8 @@ export default function CreateEmployeePage() {
               type="text"
               name="salary"
               id="salary"
+              value={form.salary}
+              onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               aria-required="true"
             />
@@ -68,6 +88,8 @@ export default function CreateEmployeePage() {
               type="text"
               name="age"
               id="age"
+              value={form.age}
+              onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               aria-required="true"
             />
