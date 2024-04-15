@@ -6,7 +6,7 @@ import {
 import {
   GetEmployeeByIdParams,
   UpdateEmployeeParams,
-} from "../params/employee.param";
+} from "../models/employee.model";
 
 export default abstract class EmployeeDatasourceContract {
   public abstract getEmployeeList(): Promise<EmployeeListModel | undefined>;

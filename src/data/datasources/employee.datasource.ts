@@ -6,13 +6,12 @@ import {
   EmployeeListSchema,
   EmployeeModel,
   EmployeeSchema,
+  GetEmployeeByIdParams,
+  GetEmployeeByIdSchema,
   UpdateEmployeeParams,
   UpdateEmployeeSchema,
 } from "@/domain/models/employee.model";
-import {
-  GetEmployeeByIdParams,
-  GetEmployeeByIdSchema,
-} from "@/domain/params/employee.param";
+;
 import { API_BASE_URL } from "./config";
 
 export default class EmployeeDatasource extends EmployeeDatasourceContract {
@@ -75,7 +74,7 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
       throw error;
     }
   }
-  
+
   public async updateEmployeeById(
     params: UpdateEmployeeParams
   ): Promise<EmployeeModel | undefined> {
