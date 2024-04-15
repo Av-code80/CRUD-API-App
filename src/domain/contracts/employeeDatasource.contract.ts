@@ -1,4 +1,5 @@
 import {
+  CreateEmployeeParams,
   EmployeeListModel,
   EmployeeModel,
 } from "../models/employee.model";
@@ -9,6 +10,7 @@ import {
 export default abstract class EmployeeDatasourceContract {
   public abstract getEmployeeList(): Promise<EmployeeListModel | undefined>;
   public abstract createEmployee(
+    params: CreateEmployeeParams
   ): Promise<EmployeeModel | undefined>;
   public abstract getEmployeeById(
     params: GetEmployeeByIdParams

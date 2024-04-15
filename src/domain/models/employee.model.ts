@@ -21,9 +21,12 @@ export const EmployeeListSchema = EmployeeSchema.array();
 export type EmployeeListModel = z.infer<typeof EmployeeListSchema>;
 
 const CreateEmployeeSalarySchema = z.string().min(1);
+const CreateEmployeeAgeSchema = z.string().min(1);
 
 export const CreateEmployeeSchema = z.object({
   name: EmployeeNameSchema,
   salary: CreateEmployeeSalarySchema,
+  age: CreateEmployeeAgeSchema,
 });
 
+export type CreateEmployeeParams = z.infer<typeof CreateEmployeeSchema>;

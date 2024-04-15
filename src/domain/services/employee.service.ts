@@ -4,7 +4,6 @@ import {
   CreateEmployeeParams,
   EmployeeListModel,
   EmployeeModel,
-  UpdateEmployeeParams,
 } from "../models/employee.model";
 import { GetEmployeeByIdParams } from "../params/employee.param";
 
@@ -42,24 +41,5 @@ export default class EmployeeService {
       return Promise.resolve(undefined);
     }
     return this.datasource.getEmployeeById(params);
-  }
-
-  public async updateEmployeeById(
-    params: UpdateEmployeeParams
-  ): Promise<EmployeeModel > {
-    try {
-      const response = await this.datasource.updateEmployeeById(params);
-      if (!response) {
-        throw new Error("🚫Failed to update employee");
-      }
-      return response;
-    } catch (error) {
-      console.error("🚫Error in updateEmployeeById:", error);
-      throw error;
-    }
-  }
-
-  public deleteEmployeeById(params: number): Promise<void> {
-    return this.datasource.deleteEmployeeById(params);
   }
 }

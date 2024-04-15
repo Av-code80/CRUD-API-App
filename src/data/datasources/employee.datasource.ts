@@ -1,6 +1,7 @@
 import EmployeeDatasourceContract from "@/domain/contracts/employeeDatasource.contract";
 import {
   CreateEmployeeParams,
+  CreateEmployeeSchema,
   EmployeeListModel,
   EmployeeListSchema,
   EmployeeModel,
@@ -52,9 +53,24 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
 
   public async createEmployee(
     params: CreateEmployeeParams
-  ): Promise<EmployeeModel> {}
-
-  public async updateEmployeeById(): Promise<EmployeeModel | undefined> {}
-
-  public async deleteEmployeeById(): Promise<void> {}
+  ): Promise<EmployeeModel> {
+    const validatedParams = CreateEmployeeSchema.parse(params);
+    try {
+      const response = await fetch(`${API_BASE_URL}/create`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(validatedParams),
+      });
+      if (!response.ok) {
+        throw new Error(
+          `Failed to create employee: ${response.status} ${response.statusText}`
+        );
+      }
+      const json = await response.json();
+      return EmployeeSchema.parse(json.data);
+    } catch (error) {
+      console.error("Error creating employee: ", error);
+      throw error;
+    }
+  }
 }
