@@ -75,7 +75,7 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
       throw error;
     }
   }
-
+  
   public async updateEmployeeById(
     params: UpdateEmployeeParams
   ): Promise<EmployeeModel | undefined> {
@@ -102,6 +102,22 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
       return EmployeeSchema.parse(json.data);
     } catch (error) {
       console.error("Error updating employee: ", error);
+      throw error;
+    }
+  }
+
+  public async deleteEmployeeById(id: number): Promise<void> {
+    try {
+      const response = await fetch(`${API_BASE_URL}/delete/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error(
+          `Failed to delete employee: ${response.status} ${response.statusText}`
+        );
+      }
+    } catch (error) {
+      console.error("Error deleting employee: ", error);
       throw error;
     }
   }

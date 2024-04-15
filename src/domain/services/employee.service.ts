@@ -58,4 +58,8 @@ export default class EmployeeService {
       throw error;
     }
   }
+
+  public deleteEmployeeById(params: number): Promise<void> {
+    return this.datasource.deleteEmployeeById(params);
+  }
 }
