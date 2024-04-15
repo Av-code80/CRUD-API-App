@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.body-bg {
+  background-image: theme("backgroundImage.gradient-linear");
+}
+
+.button-gradient {
+  background-image: theme("backgroundImage.gradient-linear");
+  box-shadow: theme("boxShadow.custom");
+  &:hover {
+    filter: brightness(105%);
+  }
+}
+
+.input-gradient {
+  border: 2px solid transparent;
+  background-image: theme("backgroundImage.gradient-linear");
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: theme("backgroundImage.gradient-linear");
+}
+
+.fade-in {
+  animation: fadeIn;
+}
