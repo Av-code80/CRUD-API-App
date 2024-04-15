@@ -10,4 +10,3 @@ export const UpdateEmployeeSchema = z.object({
   name: z.string().min(1),
 });
 export type UpdateEmployeeParams = z.infer<typeof UpdateEmployeeSchema>;
-

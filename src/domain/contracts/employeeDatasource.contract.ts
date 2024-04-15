@@ -2,6 +2,7 @@ import {
   CreateEmployeeParams,
   EmployeeListModel,
   EmployeeModel,
+  UpdateEmployeeParams,
 } from "../models/employee.model";
 import {
   GetEmployeeByIdParams,
@@ -15,6 +16,8 @@ export default abstract class EmployeeDatasourceContract {
   public abstract getEmployeeById(
     params: GetEmployeeByIdParams
   ): Promise<EmployeeModel | undefined>;
-  public abstract updateEmployeeById(): Promise<EmployeeModel | undefined>;
+  public abstract updateEmployeeById(
+    params: UpdateEmployeeParams
+  ): Promise<EmployeeModel | undefined>;
   public abstract deleteEmployeeById(): Promise<void>;
 }

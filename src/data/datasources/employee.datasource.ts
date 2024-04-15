@@ -6,6 +6,8 @@ import {
   EmployeeListSchema,
   EmployeeModel,
   EmployeeSchema,
+  UpdateEmployeeParams,
+  UpdateEmployeeSchema,
 } from "@/domain/models/employee.model";
 import {
   GetEmployeeByIdParams,
@@ -70,6 +72,36 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
       return EmployeeSchema.parse(json.data);
     } catch (error) {
       console.error("Error creating employee: ", error);
+      throw error;
+    }
+  }
+
+  public async updateEmployeeById(
+    params: UpdateEmployeeParams
+  ): Promise<EmployeeModel | undefined> {
+    const validatedParams = UpdateEmployeeSchema.parse(params);
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/update/${validatedParams.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: validatedParams.name,
+            salary: validatedParams.salary,
+            age: validatedParams.age,
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(
+          `Failed to update employee: ${response.status} ${response.statusText}`
+        );
+      }
+      const json = await response.json();
+      return EmployeeSchema.parse(json.data);
+    } catch (error) {
+      console.error("Error updating employee: ", error);
       throw error;
     }
   }
