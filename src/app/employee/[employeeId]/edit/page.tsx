@@ -5,10 +5,9 @@
  */
 "use client";
 import React, { useState, useEffect } from "react";
-import { useUpdateEmployee } from "@/domain/hooks/useUpdateEmployee.hook";
 import { useParams, useRouter } from "next/navigation";
-import { useGetEmployeeById } from "@/domain/hooks/useGetEmployeeById.hook";
 import { UpdateEmployeeParams } from "@/domain/models/employee.model";
+import { useGetEmployeeById, useUpdateEmployee } from "@/domain/hooks/useEmployee.hook";
 
 export default function EditEmployeePage() {
   const params = useParams();
@@ -54,7 +53,7 @@ export default function EditEmployeePage() {
       },
       {
         onSuccess: () => {
-          router.push("/employees");
+          router.push("/");
         },
       }
     );
@@ -69,7 +68,7 @@ export default function EditEmployeePage() {
     return (
       <div className="flex h-screen justify-center items-center">
         <div className="text-lg text-white font-bold bg-clip-text text-transparent bg-gradient-to-r from-custom-pink to-custom-orange animate-pulse">
-          Loading ⚙...
+          Loading...
         </div>
       </div>
     );

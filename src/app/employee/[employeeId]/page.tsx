@@ -5,11 +5,10 @@
  */
 "use client";
 import React from "react";
-import { useGetEmployeeById } from "@/domain/hooks/useGetEmployeeById.hook";
 import EmployeeCard from "@/ui/components/EmployeeCard.component";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useDeleteEmployee } from "@/domain/hooks/useDeleteEmployeeById.hook";
+import { useDeleteEmployee, useGetEmployeeById } from "@/domain/hooks/useEmployee.hook";
 
 export default function DetailsEmployeePage() {
   const router = useRouter();
@@ -27,7 +26,7 @@ export default function DetailsEmployeePage() {
   const handleDelete = () => {
     if (employeeIdNum) {
       deleteEmployee(employeeIdNum, {
-        onSuccess: () => router.push("/employees"),
+        onSuccess: () => router.push("/"),
         onError: (error) => {
           alert(`Error deleting employee: ${error.message}`);
         },

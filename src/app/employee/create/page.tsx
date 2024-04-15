@@ -4,7 +4,7 @@
  * @returns {React.Component} The React component for creating an employee.
  */
 "use client";
-import { useCreateEmployee } from "@/domain/hooks/useCreateEmployee.hook";
+import { useCreateEmployee } from "@/domain/hooks/useEmployee.hook";
 import { CreateEmployeeParams } from "@/domain/models/employee.model";
 import React, { useState } from "react";
 

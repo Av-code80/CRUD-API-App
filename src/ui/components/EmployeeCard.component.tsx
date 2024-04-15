@@ -5,7 +5,7 @@
  * @returns {ReactNode} A stylized card displaying employee details.
  */
 
-import EmployeeFormatter from "@/core/formatters/employee.formatter";
+import EmployeeFormatter from "@/utils/formatters/employee.formatter";
 import { EmployeeModel } from "@/domain/models/employee.model";
 import { ReactNode } from "react";
 

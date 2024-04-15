@@ -5,7 +5,7 @@
  */
 "use client";
 import React from "react";
-import { useGetEmployeeList } from "@/domain/hooks/useGetEmployeeList.hook";
+import { useGetEmployeeList } from "@/domain/hooks/useEmployee.hook";
 import EmployeeCard from "@/ui/components/EmployeeCard.component";
 import Link from "next/link";
 
@@ -22,7 +22,7 @@ export default function Home() {
           role="status"
           className="text-xl font-semibold text-gray-800 animate-pulse"
         >
-          Loading ⚙...
+          Loading...
         </div>
       </main>
     );
