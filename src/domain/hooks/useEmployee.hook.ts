@@ -1,10 +1,17 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  QueryKey,
+  useQuery,
+} from "@tanstack/react-query";
 import EmployeeService from "../services/employee.service";
 import {
   CreateEmployeeParams,
+  EmployeeListModel,
   EmployeeModel,
   UpdateEmployeeParams,
 } from "../models/employee.model";
+import { queryClient } from "@/app/layout";
 
 const service = EmployeeService.getInstance();
 
@@ -34,8 +41,22 @@ export const useCreateEmployee = () => {
 export const useUpdateEmployee = () => {
   return useMutation<UpdateEmployeeParams, Error, UpdateEmployeeParams>({
     mutationFn: (params) => service.updateEmployeeById(params),
-    onSuccess: () => {
-      alert("Employee updated successfully.");
+    onSuccess: (newData) => {
+      alert("Employee updated successfully");
+      // update react-query cache
+      // updateEmployeeById
+      queryClient.setQueryData(["getEmployeeById", newData.id], newData);
+      // updateEmployeeList
+      queryClient.setQueriesData<EmployeeListModel>(
+        { queryKey: ["getEmployeeList"] },
+        (prevList: EmployeeListModel | undefined) => {
+          return (
+            prevList?.map((emp) =>
+              emp.id === newData.id ? { ...emp, ...newData } : emp
+            ) ?? []
+          );
+        }
+      );
     },
     onError: (error) => {
       alert(`${error.message}`);
@@ -43,10 +64,23 @@ export const useUpdateEmployee = () => {
   });
 };
 
-export const useDeleteEmployee = () => {
+export const useDeleteEmployee = (id: number) => {
   return useMutation<void, Error, number>({
     mutationFn: async (employeeId) => {
       await service.deleteEmployeeById(employeeId);
     },
+    onSuccess: () => {
+    alert("Employee removed successfully");
+      queryClient.setQueriesData<EmployeeListModel>(
+        { queryKey: ["getEmployeeList"] },
+        (prevList: EmployeeListModel | undefined) => {
+          return (
+            prevList?.filter((emp) =>
+             emp.id !== id
+            ) ?? []
+          );
+        }
+      );
+    }
   });
 };

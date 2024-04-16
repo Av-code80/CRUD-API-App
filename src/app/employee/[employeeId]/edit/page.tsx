@@ -7,7 +7,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { UpdateEmployeeParams } from "@/domain/models/employee.model";
-import { useGetEmployeeById, useUpdateEmployee } from "@/domain/hooks/useEmployee.hook";
+import {
+  useGetEmployeeById,
+  useUpdateEmployee,
+} from "@/domain/hooks/useEmployee.hook";
 
 export default function EditEmployeePage() {
   const params = useParams();
@@ -53,7 +56,7 @@ export default function EditEmployeePage() {
       },
       {
         onSuccess: () => {
-          router.push("/employee");
+          router.push("/");
         },
       }
     );

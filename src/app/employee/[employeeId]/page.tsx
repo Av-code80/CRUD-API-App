@@ -24,12 +24,12 @@ export default function DetailsEmployeePage() {
     isLoading,
     isError,
   } = useGetEmployeeById(employeeIdNum);
-  const { mutate: deleteEmployee } = useDeleteEmployee();
+  const { mutate: deleteEmployee } = useDeleteEmployee(Number(employeeId));
 
   const handleDelete = () => {
     if (employeeIdNum) {
       deleteEmployee(employeeIdNum, {
-        onSuccess: () => router.push("/employee"),
+        onSuccess: () => router.push("/"),
         onError: (error) => {
           alert(`Error deleting employee: ${error.message}`);
         },

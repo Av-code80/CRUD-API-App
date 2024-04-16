@@ -16,9 +16,7 @@ import { API_BASE_URL } from "./config";
 export default class EmployeeDatasource extends EmployeeDatasourceContract {
   public async getEmployeeList(): Promise<EmployeeListModel | undefined> {
     try {
-      const response = await fetch(`${API_BASE_URL}/employees`, {
-        cache: "force-cache",
-      });
+      const response = await fetch(`${API_BASE_URL}/employees`);
       if (!response.ok) {
         throw new Error(
           `Failed to fetch employees: ${response.status} ${response.statusText}`

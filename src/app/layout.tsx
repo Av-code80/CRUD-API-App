@@ -5,10 +5,10 @@ import { Inter } from "next/font/google";
 import "./tailwind.css";
 const inter = Inter({ subsets: ["latin"] });
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1 * 60 * 1000, // 5 minutes
+      staleTime: 1 * 60 * 1000,
       retry: false,
     },
   },
