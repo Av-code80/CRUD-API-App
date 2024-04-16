@@ -11,13 +11,14 @@ import {
   UpdateEmployeeParams,
   UpdateEmployeeSchema,
 } from "@/domain/models/employee.model";
-;
 import { API_BASE_URL } from "./config";
 
 export default class EmployeeDatasource extends EmployeeDatasourceContract {
   public async getEmployeeList(): Promise<EmployeeListModel | undefined> {
     try {
-      const response = await fetch(`${API_BASE_URL}/employees`);
+      const response = await fetch(`${API_BASE_URL}/employees`, {
+        cache: "force-cache",
+      });
       if (!response.ok) {
         throw new Error(
           `Failed to fetch employees: ${response.status} ${response.statusText}`
@@ -37,7 +38,7 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
     try {
       const validatedParams = GetEmployeeByIdSchema.parse(params);
       const response = await fetch(
-        `${API_BASE_URL}/employee/${validatedParams.id}`
+        `${API_BASE_URL}/employee/${validatedParams.id}, {cache: "force-cache"}`
       );
       if (!response.ok) {
         throw new Error(
@@ -77,7 +78,7 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
 
   public async updateEmployeeById(
     params: UpdateEmployeeParams
-  ): Promise<EmployeeModel | undefined> {
+  ): Promise<UpdateEmployeeParams | undefined> {
     const validatedParams = UpdateEmployeeSchema.parse(params);
     try {
       const response = await fetch(
@@ -85,10 +86,12 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
+          cache: "force-cache",
           body: JSON.stringify({
             name: validatedParams.name,
             salary: validatedParams.salary,
             age: validatedParams.age,
+            id: validatedParams.id,
           }),
         }
       );
@@ -98,7 +101,7 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
         );
       }
       const json = await response.json();
-      return EmployeeSchema.parse(json.data);
+      return UpdateEmployeeSchema.parse(json.data);
     } catch (error) {
       console.error("Error updating employee: ", error);
       throw error;

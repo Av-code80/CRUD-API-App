@@ -29,7 +29,7 @@ export default function DetailsEmployeePage() {
   const handleDelete = () => {
     if (employeeIdNum) {
       deleteEmployee(employeeIdNum, {
-        onSuccess: () => router.push("/"),
+        onSuccess: () => router.push("/employee"),
         onError: (error) => {
           alert(`Error deleting employee: ${error.message}`);
         },
@@ -72,7 +72,7 @@ export default function DetailsEmployeePage() {
         <div className="flex space-x-4">
           <Link
             href={`/employee/${employee?.id}/edit`}
-            className="button-gradient inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white"
+            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600"
             aria-label="Edit employee"
           >
             ✏️ Edit

@@ -53,7 +53,7 @@ export default function EditEmployeePage() {
       },
       {
         onSuccess: () => {
-          router.push("/");
+          router.push("/employee");
         },
       }
     );

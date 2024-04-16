@@ -46,7 +46,7 @@ export default class EmployeeService {
 
   public async updateEmployeeById(
     params: UpdateEmployeeParams
-  ): Promise<EmployeeModel> {
+  ): Promise<UpdateEmployeeParams> {
     try {
       const response = await this.datasource.updateEmployeeById(params);
       if (!response) {
