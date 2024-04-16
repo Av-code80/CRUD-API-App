@@ -59,7 +59,11 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
       const response = await fetch(`${API_BASE_URL}/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(validatedParams),
+        body: JSON.stringify({
+          name: validatedParams.name,
+          salary: validatedParams.salary,
+          age: parseInt(validatedParams.age, 10), 
+        }),
       });
       if (!response.ok) {
         throw new Error(
@@ -85,12 +89,7 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           cache: "force-cache",
-          body: JSON.stringify({
-            name: validatedParams.name,
-            salary: validatedParams.salary,
-            age: validatedParams.age,
-            id: validatedParams.id,
-          }),
+          body: JSON.stringify(validatedParams),
         }
       );
       if (!response.ok) {

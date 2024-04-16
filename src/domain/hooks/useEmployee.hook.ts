@@ -35,6 +35,16 @@ export const useCreateEmployee = () => {
   return useMutation<EmployeeModel, Error, CreateEmployeeParams>({
     mutationFn: (newEmployeeData: CreateEmployeeParams) =>
       service.createEmployee(newEmployeeData),
+    onSuccess: (newData) => {
+      // Update the employee list in the cache
+      queryClient.setQueriesData<EmployeeListModel>(
+        { queryKey: ["getEmployeeList"] }, 
+        (oldList: EmployeeListModel | undefined) => {
+          const updatedList = oldList ? [...oldList, newData] : [newData];
+          return updatedList;
+        }
+      );
+    },
   });
 };
 
@@ -43,7 +53,6 @@ export const useUpdateEmployee = () => {
     mutationFn: (params) => service.updateEmployeeById(params),
     onSuccess: (newData) => {
       alert("Employee updated successfully");
-      // update react-query cache
       // updateEmployeeById
       queryClient.setQueryData(["getEmployeeById", newData.id], newData);
       // updateEmployeeList
@@ -70,17 +79,13 @@ export const useDeleteEmployee = (id: number) => {
       await service.deleteEmployeeById(employeeId);
     },
     onSuccess: () => {
-    alert("Employee removed successfully");
+      alert("Employee removed successfully");
       queryClient.setQueriesData<EmployeeListModel>(
         { queryKey: ["getEmployeeList"] },
         (prevList: EmployeeListModel | undefined) => {
-          return (
-            prevList?.filter((emp) =>
-             emp.id !== id
-            ) ?? []
-          );
+          return prevList?.filter((emp) => emp.id !== id) ?? [];
         }
       );
-    }
+    },
   });
 };

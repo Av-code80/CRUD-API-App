@@ -7,9 +7,11 @@
 "use client";
 import { useCreateEmployee } from "@/domain/hooks/useEmployee.hook";
 import { CreateEmployeeParams } from "@/domain/models/employee.model";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function CreateEmployeePage() {
+  const router = useRouter();
   const { mutate: createEmployee, isError, error } = useCreateEmployee();
   const [form, setForm] = useState<CreateEmployeeParams>({
     name: "",
@@ -19,7 +21,12 @@ export default function CreateEmployeePage() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    createEmployee(form);
+    createEmployee(form, {
+      onSuccess: () => router.push("/"),
+      onError: (error) => {
+        alert(`Error deleting employee: ${error.message}`);
+      },
+    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,4 +101,3 @@ export default function CreateEmployeePage() {
     </main>
   );
 }
-
