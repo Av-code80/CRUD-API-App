@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .button-gradient {
+    @apply bg-gradient-to-r from-custom-pink to-custom-light-pink text-white font-bold py-2 px-4 rounded shadow-md transition-colors duration-200 ease-in-out;
+    &:hover {
+      @apply from-custom-pink hover:to-blue-600;
+    }
+  }
+
+  .input-gradient {
+    @apply border-2 border-transparent bg-gradient-to-r from-custom-pink to-custom-light-pink bg-origin-border bg-clip-padding-box, border-box;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-custom-pink to-custom-light-pink;
+  }
+}

@@ -8,7 +8,10 @@ import React from "react";
 import EmployeeCard from "@/ui/components/EmployeeCard.component";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useDeleteEmployee, useGetEmployeeById } from "@/domain/hooks/useEmployee.hook";
+import {
+  useDeleteEmployee,
+  useGetEmployeeById,
+} from "@/domain/hooks/useEmployee.hook";
 
 export default function DetailsEmployeePage() {
   const router = useRouter();
@@ -38,7 +41,7 @@ export default function DetailsEmployeePage() {
     return (
       <div className="flex h-screen justify-center items-center">
         <div
-          role="alert"
+          role="status"
           aria-busy="true"
           className="text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg p-3 animate-pulse"
         >
@@ -69,14 +72,14 @@ export default function DetailsEmployeePage() {
         <div className="flex space-x-4">
           <Link
             href={`/employee/${employee?.id}/edit`}
-            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600"
+            className="button-gradient inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white"
             aria-label="Edit employee"
           >
             ✏️ Edit
           </Link>
           <button
             onClick={handleDelete}
-            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-700"
+            className="button-gradient inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white"
             aria-label="Delete employee"
           >
             🗑️ Delete

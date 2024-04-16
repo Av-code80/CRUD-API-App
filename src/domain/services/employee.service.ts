@@ -4,9 +4,9 @@ import {
   CreateEmployeeParams,
   EmployeeListModel,
   EmployeeModel,
+  GetEmployeeByIdParams,
   UpdateEmployeeParams,
 } from "../models/employee.model";
-import { GetEmployeeByIdParams } from "../params/employee.param";
 
 export default class EmployeeService {
   private static _instance: EmployeeService;

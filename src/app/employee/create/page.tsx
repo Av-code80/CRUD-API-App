@@ -3,6 +3,7 @@
  * @description Provides a form to create a new employee. It handles state management, form submission, and user feedback for errors.
  * @returns {React.Component} The React component for creating an employee.
  */
+
 "use client";
 import { useCreateEmployee } from "@/domain/hooks/useEmployee.hook";
 import { CreateEmployeeParams } from "@/domain/models/employee.model";
@@ -28,7 +29,7 @@ export default function CreateEmployeePage() {
 
   if (isError && error instanceof Error) {
     return (
-      <div role="alert" className="flex h-screen justify-center items-center">
+      <div className="flex h-screen justify-center items-center">
         <div className="bg-red-500 text-white font-bold rounded-lg p-3 shadow-lg animate-pulse">
           {error.message}
         </div>
@@ -44,16 +45,12 @@ export default function CreateEmployeePage() {
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-neutral-600"
-            >
+            <label className="block text-sm font-medium text-neutral-600">
               Name
             </label>
             <input
               type="text"
               name="name"
-              id="name"
               value={form.name}
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -61,16 +58,12 @@ export default function CreateEmployeePage() {
             />
           </div>
           <div>
-            <label
-              htmlFor="salary"
-              className="block text-sm font-medium text-neutral-600"
-            >
+            <label className="block text-sm font-medium text-neutral-600">
               Salary
             </label>
             <input
               type="text"
               name="salary"
-              id="salary"
               value={form.salary}
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -78,16 +71,12 @@ export default function CreateEmployeePage() {
             />
           </div>
           <div>
-            <label
-              htmlFor="age"
-              className="block text-sm font-medium text-neutral-600"
-            >
+            <label className="block text-sm font-medium text-neutral-600">
               Age
             </label>
             <input
               type="text"
               name="age"
-              id="age"
               value={form.age}
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -105,3 +94,4 @@ export default function CreateEmployeePage() {
     </main>
   );
 }
+

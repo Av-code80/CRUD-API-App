@@ -3,25 +3,20 @@
  * @description Displays a list of employees fetched from an API. Provides options to navigate to employee creation and individual employee details.
  * @returns {React.Component} The main landing page component which lists all employees.
  */
+
 "use client";
 import React from "react";
-import { useGetEmployeeList } from "@/domain/hooks/useEmployee.hook";
 import EmployeeCard from "@/ui/components/EmployeeCard.component";
 import Link from "next/link";
+import { useGetEmployeeList } from "@/domain/hooks/useEmployee.hook";
 
 export default function Home() {
   const { data, isLoading, isError } = useGetEmployeeList();
 
   if (isLoading) {
     return (
-      <main
-        className="flex h-screen items-center justify-center bg-gray-100"
-        aria-busy="true"
-      >
-        <div
-          role="status"
-          className="text-xl font-semibold text-gray-800 animate-pulse"
-        >
+      <main className="flex h-screen items-center justify-center bg-gray-100">
+        <div className="text-xl font-semibold text-gray-800 animate-pulse">
           Loading...
         </div>
       </main>
@@ -30,10 +25,7 @@ export default function Home() {
 
   if (!data && !isLoading && isError) {
     return (
-      <main
-        className="flex h-screen items-center justify-center bg-gray-100"
-        aria-live="assertive"
-      >
+      <main className="flex h-screen items-center justify-between bg-gray-100">
         <div className="text-xl font-semibold text-red-500 animate-pulse">
           An error occurred while fetching the employees
         </div>
@@ -46,10 +38,7 @@ export default function Home() {
       <h1 className="text-3xl font-bold text-sky-800">
         Employee List {data && <span>({data.length})</span>}
       </h1>
-      <Link
-        className="bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-700 text-white font-bold py-2 px-4 rounded shadow-lg transition-colors"
-        href={`/employee/create`}
-      >
+      <Link className="button-gradient" href={`/employee/create`}>
         Create New Employee
       </Link>
       {data && (
