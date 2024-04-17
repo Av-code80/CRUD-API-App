@@ -72,14 +72,14 @@ export default function DetailsEmployeePage() {
         <div className="flex space-x-4">
           <Link
             href={`/employee/${employee?.id}/edit`}
-            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600"
+            className="button-edit"
             aria-label="Edit employee"
           >
             ✏️ Edit
           </Link>
           <button
             onClick={handleDelete}
-            className="button-gradient inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white"
+            className="button-gradient inline-flex items-center justify-center border text-sm font-medium rounded-md shadow-sm"
             aria-label="Delete employee"
           >
             🗑️ Delete
