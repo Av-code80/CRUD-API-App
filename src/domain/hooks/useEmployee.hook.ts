@@ -1,7 +1,5 @@
 import {
   useMutation,
-  useQueryClient,
-  QueryKey,
   useQuery,
 } from "@tanstack/react-query";
 import EmployeeService from "../services/employee.service";
@@ -11,7 +9,7 @@ import {
   EmployeeModel,
   UpdateEmployeeParams,
 } from "../models/employee.model";
-import { queryClient } from "@/app/layout";
+import { queryClient } from "@/utils/queryClient";
 
 const service = EmployeeService.getInstance();
 

@@ -1,18 +1,10 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { Inter } from "next/font/google";
 import "./tailwind.css";
+import { queryClient } from "@/utils/queryClient";
 const inter = Inter({ subsets: ["latin"] });
-
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1 * 60 * 1000,
-      retry: false,
-    },
-  },
-});
 
 export default function RootLayout({
   children,

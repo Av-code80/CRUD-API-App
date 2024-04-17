@@ -62,7 +62,7 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
         body: JSON.stringify({
           name: validatedParams.name,
           salary: validatedParams.salary,
-          age: parseInt(validatedParams.age, 10), 
+          age: parseInt(validatedParams.age, 10),
         }),
       });
       if (!response.ok) {
@@ -71,7 +71,12 @@ export default class EmployeeDatasource extends EmployeeDatasourceContract {
         );
       }
       const json = await response.json();
-      return EmployeeSchema.parse(json.data);
+      return EmployeeSchema.parse({
+        id: Number(json.data.id),
+        employee_name: json.data.name,
+        employee_salary: Number(json.data.salary),
+        employee_age: Number(json.data.age),
+      });
     } catch (error) {
       console.error("Error creating employee: ", error);
       throw error;
