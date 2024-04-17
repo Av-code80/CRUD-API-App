@@ -31,6 +31,10 @@ const EmployeeCard = ({ employee }: EmployeeCardProps): ReactNode => {
         <span className="font-bold">Salary:</span>
         <span>{EmployeeFormatter.formatSalary(employee.employee_salary)}</span>
       </div>
+      <div className="flex items-center gap-2">
+        <span className="font-bold">Age:</span>
+        <span>{employee.employee_age}</span>
+      </div>
     </div>
   );
 };
