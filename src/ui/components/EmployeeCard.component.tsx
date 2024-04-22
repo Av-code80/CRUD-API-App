@@ -16,7 +16,7 @@ export interface EmployeeCardProps {
 const EmployeeCard = ({ employee }: EmployeeCardProps): ReactNode => {
   return (
     <div
-      className="p-4 flex gap-4 items-center justify-between bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-lg shadow-lg text-white"
+      className="p-4 flex gap-4 transition duration-300 ease-in-out transform hover:scale-105 items-center justify-between bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-lg shadow-lg text-white"
       aria-label={`Employee ID ${employee.id} details`}
     >
       <div className="flex items-center gap-2">
